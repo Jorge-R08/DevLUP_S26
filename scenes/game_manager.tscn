@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="1_udu3i"]
 [ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="2_oo155"]
 [ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="3_eaq8r"]
+[ext_resource type="Script" uid="uid://gq8suuf4xdks" path="res://scripts/tutorial_mob.gd" id="4_jdad8"]
 [ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_eaq8r"]
 [ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="5_ternb"]
 [ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="7_q8mjp"]
@@ -32,10 +33,18 @@ actions = {
 "slash": NodePath("actions/slash")
 }
 is_player = true
+curse_blinded = false
 
-[node name="mob" parent="." unique_id=1726908891 instance=ExtResource("3_eaq8r")]
+[node name="mob" parent="." unique_id=1726908891 node_paths=PackedStringArray("actions") instance=ExtResource("3_eaq8r")]
 position = Vector2(1028, 303)
 scale = Vector2(4, 4)
+script = ExtResource("4_jdad8")
+actions = {
+"defend": NodePath("actions/defend"),
+"heal": NodePath("actions/heal"),
+"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"slash": NodePath("actions/slash")
+}
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=456155950]
 layer = -1

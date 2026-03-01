@@ -1,7 +1,47 @@
 [gd_scene format=3 uid="uid://c6cg33os57pgm"]
 
-[ext_resource type="Texture2D" uid="uid://8htbaoyqqxw7" path="res://assets/testing/sugoma.png" id="1_japp3"]
 [ext_resource type="Script" uid="uid://dhh1710rmdqtu" path="res://scripts/default_mob.gd" id="1_jfa71"]
+[ext_resource type="Texture2D" uid="uid://df3pim2678m4g" path="res://assets/testing/slime_purple.png" id="2_jfa71"]
+[ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="3_fht01"]
+[ext_resource type="PackedScene" uid="uid://ck3svbdvwtbc0" path="res://scenes/action.tscn" id="3_vuo4q"]
+[ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="4_vuo4q"]
+[ext_resource type="Texture2D" uid="uid://h6u3ll1sm06k" path="res://icon.svg" id="6_feusp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufid7"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fht01"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuo4q"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_feusp"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pb7su"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufid7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fht01")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuo4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_feusp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jfa71"]
 load_path = "res://.godot/imported/healthbarUnder.png-63e3ceacc15a6eddb3583b4fc970b986.ctex"
@@ -9,12 +49,141 @@ load_path = "res://.godot/imported/healthbarUnder.png-63e3ceacc15a6eddb3583b4fc9
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufid7"]
 load_path = "res://.godot/imported/healthbarProgress.png-cb37a4bb36663e60a2670e1e0570901e.ctex"
 
-[node name="default_mob" type="Node2D" unique_id=1726908891]
-script = ExtResource("1_jfa71")
+[sub_resource type="Animation" id="Animation_smehm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("think_sprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.17453292]
+}
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1206845249]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_japp3")
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-6, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ur7pv"]
+resource_name = "hurt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pb7su"]
+resource_name = "think"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("think_sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.17453292, 0.17453292519943295, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfa71"]
+_data = {
+&"RESET": SubResource("Animation_smehm"),
+&"attack": SubResource("Animation_fjrip"),
+&"hurt": SubResource("Animation_ur7pv"),
+&"think": SubResource("Animation_pb7su")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eaq8r"]
+atlas = ExtResource("3_fht01")
+region = Rect2(2, 4, 99, 99)
+
+[node name="default_mob" type="Node2D" unique_id=1726908891 node_paths=PackedStringArray("actions")]
+script = ExtResource("1_jfa71")
+actions = {
+"defend": NodePath("actions/defend"),
+"heal": NodePath("actions/heal"),
+"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"slash": NodePath("actions/slash")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1172630743]
+sprite_frames = SubResource("SpriteFrames_pb7su")
 
 [node name="health_bar" type="TextureProgressBar" parent="." unique_id=1087996292]
 offset_left = -13.0
@@ -27,3 +196,63 @@ texture_under = SubResource("CompressedTexture2D_jfa71")
 texture_progress = SubResource("CompressedTexture2D_ufid7")
 
 [node name="actions" type="Node" parent="." unique_id=1953926423]
+
+[node name="slash" parent="actions" unique_id=1555499959 instance=ExtResource("3_vuo4q")]
+display_name = "slash"
+description = "s"
+damage = 10
+cost = 7
+
+[node name="heal" parent="actions" unique_id=786974701 instance=ExtResource("3_vuo4q")]
+display_name = "heal"
+description = "heals"
+type = 1
+heal_amnt = 20
+
+[node name="pharaohs_curse" parent="actions" unique_id=872569760 instance=ExtResource("3_vuo4q")]
+cost = 40
+
+[node name="defend" parent="actions" unique_id=2006819646 instance=ExtResource("3_vuo4q")]
+display_name = "block"
+description = "s"
+type = 3
+cost = 10
+turn_wait = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2145972409]
+libraries/ = SubResource("AnimationLibrary_jfa71")
+autoplay = &"RESET"
+
+[node name="action_label" type="TextureRect" parent="." unique_id=999322299]
+visible = false
+offset_left = -15.000001
+offset_top = -4.0
+offset_right = 84.0
+offset_bottom = 95.0
+scale = Vector2(0.3, 0.05)
+texture = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="action_label" unique_id=493079016]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.66667
+offset_top = 19.999998
+offset_right = 86.66667
+offset_bottom = 60.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_vuo4q")
+theme_override_font_sizes/normal_font_size = 16
+text = "placeholder"
+
+[node name="label_timer" type="Timer" parent="action_label" unique_id=1697608817]
+wait_time = 1.5
+one_shot = true
+
+[node name="think_sprite" type="Sprite2D" parent="." unique_id=625545048]
+position = Vector2(1.1920929e-07, -4.000001)
+rotation = 0.17453292
+scale = Vector2(0.043975517, 0.043975517)
+texture = ExtResource("6_feusp")
+
+[connection signal="timeout" from="action_label/label_timer" to="." method="_on_label_timer_timeout"]

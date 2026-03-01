@@ -1,6 +1,6 @@
 extends Node2D
 
-const CURSE_BLIND_TURNS = 3
+const CURSE_BLIND_TURNS = 4
 
 @export var actions : Dictionary[String, Action]
 
@@ -13,6 +13,7 @@ var curr_curse_blind_turns = 0
 
 @onready var _health_bar: TextureProgressBar = $health_bar
 @onready var _stamina_bar: TextureProgressBar = $stamina_bar
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var is_player : bool
 
@@ -31,22 +32,17 @@ func _process(delta: float) -> void:
 	pass
 	
 func start_turn():
-	if !is_player:
-		print("Mob turn start")
-	else:
-		print("Player turn start")
+	print("Player turn start -- Stamina: ", curr_stamina)
 
 func end_turn():
-	if !is_player:
-		print("Mob turn end")
-	else:
-		print("Player turn end")
+	print("Player turn end")
 	
 func take_damage(dmg : int):
 	#hurt animation
 	if blocking: dmg = dmg / 2
 	curr_health = max(0, curr_health-dmg)
 	_health_bar.value = curr_health
+	animation_player.play("hurt")
 	
 func heal(amnt : int):
 	#heal animation

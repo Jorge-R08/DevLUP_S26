@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d17b8rja7an68" path="res://assets/testing/healthbarProgress.png" id="4_fjrip"]
 [ext_resource type="PackedScene" uid="uid://ck3svbdvwtbc0" path="res://scenes/action.tscn" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://ecpd52soen54" path="res://scripts/action.gd" id="5_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://cn5sjk6raikl8" path="res://assets/testing/amogus.png" id="7_fjrip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("2_qlg0r")
@@ -48,6 +49,108 @@ load_path = "res://.godot/imported/healthbarUnder.png-63e3ceacc15a6eddb3583b4fc9
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fjrip"]
 load_path = "res://.godot/imported/healthbarProgress.png-cb37a4bb36663e60a2670e1e0570901e.ctex"
+
+[sub_resource type="Animation" id="Animation_smehm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("think_sprite:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.17453292]
+}
+
+[sub_resource type="Animation" id="Animation_fjrip"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-6, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ur7pv"]
+resource_name = "hurt"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y4r1p"]
+_data = {
+&"RESET": SubResource("Animation_smehm"),
+&"attack": SubResource("Animation_fjrip"),
+&"hurt": SubResource("Animation_ur7pv")
+}
 
 [node name="Player" type="Node2D" unique_id=1548218120 node_paths=PackedStringArray("actions")]
 script = ExtResource("1_dqkch")
@@ -113,6 +216,7 @@ type = 1
 damage = 20
 heal_amnt = 1
 cost = 20
+turn_wait = 3
 
 [node name="biden_blast" parent="actions" unique_id=1313449993 instance=ExtResource("5_qlg0r")]
 display_name = "biden_blast"
@@ -132,5 +236,14 @@ cost = 10
 turn_wait = 4
 
 [node name="skip" parent="actions" unique_id=1606103633 instance=ExtResource("5_qlg0r")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=540753999]
+libraries/ = SubResource("AnimationLibrary_y4r1p")
+autoplay = &"RESET"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1754176562]
+visible = false
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_fjrip")
 
 [connection signal="toggle_blocking" from="actions/defend" to="." method="_on_defend_toggle_blocking"]

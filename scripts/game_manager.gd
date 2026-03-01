@@ -26,6 +26,7 @@ var curr_char : characters = characters.NULL
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Game Starting")
+	mob_char.find_child("think_sprite").visible = false
 	#await get_tree().create_timer(1).timeout
 	#dialogue_manager.show_messages([
 		#"let's see...",
@@ -71,10 +72,16 @@ func next_turn():
 		await action_performed
 		await  get_tree().create_timer(AFTER_ACTION_WAIT_TIME).timeout
 	elif curr_char == characters.MOB:
+		mob_char.find_child("think_sprite").visible = true
+		mob_char.animation_player.play("think")
 		var wait_time = randf_range(MIN_MOB_THINK_TIME, MAX_MOB_THINK_TIME)
 		await  get_tree().create_timer(wait_time).timeout
-		#mob_char.perform_action()
-		print("MOB ATTACK AAAAAAAAAAAAAA")
+		mob_char.animation_player.stop
+		mob_char.find_child("think_sprite").visible = false
+		
+		var mob_action : Action = mob_char.decide_action()
+		mob_action.trigger(player_char)
+		
 		await  get_tree().create_timer(AFTER_ACTION_WAIT_TIME).timeout
 		
 	next_turn()
@@ -103,7 +110,6 @@ func _on_action_performed() -> void:
 	for btn in _action_buttons.get_children():
 		btn.disabled = true
 	for action in player_char.actions:
-		print(player_char.actions[action].curr_turn_wait)
 		player_char.actions[action].curr_turn_wait = min(player_char.actions[action].turn_wait, player_char.actions[action].curr_turn_wait+1)
 	
 
@@ -138,3 +144,7 @@ func _on_WeirdButton_pressed() -> void:
 		"At least it's not a goose,{p=0.2} now THAT's [shake]terrifying[/shake]"
 	])
 """
+
+
+func _on_mob_mob_action(action: Action) -> void:
+	pass # Replace with function body.
