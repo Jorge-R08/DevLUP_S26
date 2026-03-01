@@ -1,11 +1,16 @@
 class_name Action
 extends Node
 
+const STAMINA_GAIN_ON_SKIP = 15
+const STAMINA_GAIN_ON_ACTION = 5
+const TURN_WAIT_RESET = 1
+
 enum action_type {
 	ATTACK,
 	HEAL,
 	SPECIAL,
-	BLOCK
+	BLOCK,
+	SKIP
 }
 
 @export var display_name : String
@@ -15,10 +20,11 @@ enum action_type {
 @export var damage : int
 @export var heal_amnt : int = 0
 @export var cost : int
-@export var turn_wait : int = 0
+@export var turn_wait : int = TURN_WAIT_RESET
 
 signal toggle_blocking
 
+var curr_turn_wait : int = TURN_WAIT_RESET
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,6 +39,9 @@ func trigger(character : Node2D):
 
 	if char.name == "Player":
 		char.reduce_stamina(cost)
+		char.increase_stamina(STAMINA_GAIN_ON_ACTION)
+		curr_turn_wait = TURN_WAIT_RESET-1
+
 	
 	match type:
 		action_type.ATTACK:
@@ -48,6 +57,9 @@ func trigger(character : Node2D):
 			print("SPECIAL ACTION PERFORMED")
 		action_type.BLOCK:
 			print("BLOCK ACTION PERFORMED")
+		action_type.SKIP:
+			print("SKIP ACTION PERFORMED")
+			char.increase_stamina(STAMINA_GAIN_ON_SKIP)
 		
 func choose(array : Array):
 	array.shuffle()

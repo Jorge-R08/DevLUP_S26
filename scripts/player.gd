@@ -1,5 +1,7 @@
 extends Node2D
 
+const CURSE_BLIND_TURNS = 3
+
 @export var actions : Dictionary[String, Action]
 
 @export var max_health : int = 100
@@ -7,6 +9,7 @@ extends Node2D
 var curr_health : int = max_health
 var curr_stamina : int = max_stamina
 
+var curr_curse_blind_turns = 0
 
 @onready var _health_bar: TextureProgressBar = $health_bar
 @onready var _stamina_bar: TextureProgressBar = $stamina_bar
@@ -33,7 +36,6 @@ func start_turn():
 	else:
 		print("Player turn start")
 
-	
 func end_turn():
 	if !is_player:
 		print("Mob turn end")
@@ -42,6 +44,7 @@ func end_turn():
 	
 func take_damage(dmg : int):
 	#hurt animation
+	if blocking: dmg = dmg / 2
 	curr_health = max(0, curr_health-dmg)
 	_health_bar.value = curr_health
 	
@@ -54,6 +57,9 @@ func reduce_stamina(amnt : int):
 	curr_stamina = max(0, curr_stamina-amnt)
 	_stamina_bar.value = curr_stamina	
 
+func increase_stamina(amnt : int):
+	curr_stamina = min(max_stamina, curr_stamina+amnt)
+	_stamina_bar.value = curr_stamina	
 
 func _on_defend_toggle_blocking() -> void:
 	blocking = !blocking

@@ -36,12 +36,25 @@ func _ready() -> void:
 func next_turn():
 	if game_over:
 		return
+		
+	if player_char.curse_blinded:
+		print("player curse blinded")
+		player_char.curr_curse_blind_turns = min(player_char.curr_curse_blind_turns+1, player_char.CURSE_BLIND_TURNS)
+		if (player_char.curr_curse_blind_turns == player_char.CURSE_BLIND_TURNS):
+			player_char.curse_blinded = false
+			player_char.curr_curse_blind_turns = 0
+	if mob_char.curse_blinded:
+		mob_char.curr_curse_blind_turns = min(mob_char.curr_curse_blind_turns+1, mob_char.CURSE_BLIND_TURNS)
+		if (mob_char.curr_curse_blind_turns == mob_char.CURSE_BLIND_TURNS):
+			mob_char.curse_blinded = false
+			mob_char.curr_curse_blind_turns = 0
 
 	if curr_char == characters.NULL:
 		player_char.start_turn()
 		curr_char = characters.PLAYER
 		for btn in _action_buttons.get_children():
-			btn.disabled = false
+			if (player_char.actions[btn.get_child(0).text].turn_wait == 1):
+				btn.disabled = false
 	elif curr_char == characters.PLAYER:
 		player_char.end_turn()
 		mob_char.start_turn()
@@ -51,8 +64,9 @@ func next_turn():
 		player_char.start_turn()
 		curr_char = characters.PLAYER
 		for btn in _action_buttons.get_children():
-			btn.disabled = false
-	
+			if (player_char.actions[btn.get_child(0).text].curr_turn_wait >= player_char.actions[btn.get_child(0).text].turn_wait):
+				btn.disabled = false
+							
 	if curr_char == characters.PLAYER:
 		await action_performed
 		await  get_tree().create_timer(AFTER_ACTION_WAIT_TIME).timeout
@@ -78,17 +92,20 @@ func _on_heal_btn_pressed() -> void:
 	action_performed.emit()
 
 func _on_biden_blast_btn_pressed() -> void:
-	player_char.actions["biden_blast"].trigger(mob_char)
+	player_char.actions["biden blast"].trigger(mob_char)
 	action_performed.emit()
 
 func _on_pharaoh_btn_pressed() -> void:
-	player_char.actions["pharaohs_curse"].trigger(mob_char)
+	player_char.actions["pharaohs curse"].trigger(mob_char)
 	action_performed.emit()
 
 func _on_action_performed() -> void:
 	for btn in _action_buttons.get_children():
 		btn.disabled = true
-
+	for action in player_char.actions:
+		print(player_char.actions[action].curr_turn_wait)
+		player_char.actions[action].curr_turn_wait = min(player_char.actions[action].turn_wait, player_char.actions[action].curr_turn_wait+1)
+	
 
 """
 #dialogue use sample 

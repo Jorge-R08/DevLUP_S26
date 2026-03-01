@@ -52,13 +52,15 @@ load_path = "res://.godot/imported/healthbarProgress.png-cb37a4bb36663e60a2670e1
 [node name="Player" type="Node2D" unique_id=1548218120 node_paths=PackedStringArray("actions")]
 script = ExtResource("1_dqkch")
 actions = {
-"biden_blast": NodePath("actions/biden_blast"),
+"biden blast": NodePath("actions/biden_blast"),
 "defend": NodePath("actions/defend"),
 "heal": NodePath("actions/heal"),
-"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"pharaohs curse": NodePath("actions/pharaohs_curse"),
+"skip": NodePath("actions/skip"),
 "slap": NodePath("actions/slap"),
 "slash": NodePath("actions/slash")
 }
+curse_blinded = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1200667129]
 sprite_frames = SubResource("SpriteFrames_3v2ag")
@@ -102,6 +104,7 @@ display_name = "slap"
 description = "s"
 damage = 5
 cost = 10
+turn_wait = 2
 
 [node name="heal" parent="actions" unique_id=1555499959 instance=ExtResource("5_qlg0r")]
 display_name = "heal"
@@ -116,6 +119,7 @@ display_name = "biden_blast"
 description = "s"
 damage = 67
 cost = 35
+turn_wait = 3
 
 [node name="pharaohs_curse" parent="actions" unique_id=1709239245 instance=ExtResource("5_qlg0r")]
 cost = 40
@@ -125,4 +129,8 @@ display_name = "block"
 description = "s"
 type = 3
 cost = 10
-turn_wait = 3
+turn_wait = 4
+
+[node name="skip" parent="actions" unique_id=1606103633 instance=ExtResource("5_qlg0r")]
+
+[connection signal="toggle_blocking" from="actions/defend" to="." method="_on_defend_toggle_blocking"]

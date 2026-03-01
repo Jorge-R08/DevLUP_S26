@@ -23,12 +23,15 @@ z_index = 1
 position = Vector2(253, 300)
 scale = Vector2(4, 4)
 actions = {
-"biden_blast": NodePath("actions/biden_blast"),
+"biden blast": NodePath("actions/biden_blast"),
+"defend": NodePath("actions/defend"),
 "heal": NodePath("actions/heal"),
-"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"pharaohs curse": NodePath("actions/pharaohs_curse"),
+"skip": NodePath("actions/skip"),
 "slap": NodePath("actions/slap"),
 "slash": NodePath("actions/slash")
 }
+is_player = true
 
 [node name="mob" parent="." unique_id=1726908891 instance=ExtResource("3_eaq8r")]
 position = Vector2(1028, 303)
@@ -54,6 +57,7 @@ offset_top = 449.0
 offset_right = 169.0
 offset_bottom = 548.0
 scale = Vector2(2, 1.2)
+disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/slash_btn" unique_id=468899244]
@@ -75,6 +79,7 @@ offset_top = 452.0
 offset_right = 392.0
 offset_bottom = 551.0
 scale = Vector2(2, 1.2)
+disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/slap_btn" unique_id=1958511456]
@@ -92,6 +97,7 @@ offset_top = 570.0
 offset_right = 387.0
 offset_bottom = 669.0
 scale = Vector2(2, 1.2)
+disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/heal_btn" unique_id=1622215665]
@@ -109,6 +115,7 @@ offset_top = 569.0
 offset_right = 169.0
 offset_bottom = 668.0
 scale = Vector2(2, 1.2)
+disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/biden_blast_btn" unique_id=1999915917]
@@ -118,7 +125,7 @@ offset_top = 23.333332
 offset_right = 96.0
 offset_bottom = 83.33333
 mouse_filter = 2
-text = "Biden Blast"
+text = "biden blast"
 
 [node name="pharaoh_btn" type="TextureButton" parent="UI/action_buttons" unique_id=877487679]
 offset_left = 509.0
@@ -126,6 +133,7 @@ offset_top = 571.0
 offset_right = 608.0
 offset_bottom = 670.0
 scale = Vector2(2, 1.2)
+disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/pharaoh_btn" unique_id=1381291668]
@@ -135,7 +143,7 @@ offset_top = 23.333332
 offset_right = 96.0
 offset_bottom = 83.33333
 mouse_filter = 2
-text = "Pharaoh's Curse"
+text = "pharaohs curse"
 
 [connection signal="action_performed" from="." to="." method="_on_action_performed"]
 [connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
