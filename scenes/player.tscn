@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://gsrj824q8nnq"]
+
+[ext_resource type="Script" uid="uid://b4quf7iexgnyj" path="res://scripts/player.gd" id="1_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bguqioysqnf74" path="res://assets/testing/knight.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://dsrjyekq02unx" path="res://assets/testing/healthbarUnder.png" id="3_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://d17b8rja7an68" path="res://assets/testing/healthbarProgress.png" id="4_fjrip"]
+[ext_resource type="PackedScene" uid="uid://ck3svbdvwtbc0" path="res://scenes/action.tscn" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://ecpd52soen54" path="res://scripts/action.gd" id="5_tuyoq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3v2ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tuyoq"]
+load_path = "res://.godot/imported/healthbarUnder.png-63e3ceacc15a6eddb3583b4fc970b986.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fjrip"]
+load_path = "res://.godot/imported/healthbarProgress.png-cb37a4bb36663e60a2670e1e0570901e.ctex"
+
+[node name="Player" type="Node2D" unique_id=1548218120 node_paths=PackedStringArray("actions")]
+script = ExtResource("1_dqkch")
+actions = {
+"biden_blast": NodePath("actions/biden_blast"),
+"defend": NodePath("actions/defend"),
+"heal": NodePath("actions/heal"),
+"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"slap": NodePath("actions/slap"),
+"slash": NodePath("actions/slash")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1200667129]
+sprite_frames = SubResource("SpriteFrames_3v2ag")
+autoplay = "default"
+frame = 2
+frame_progress = 0.7506019
+
+[node name="health_bar" type="TextureProgressBar" parent="." unique_id=1540150599]
+offset_left = -12.999999
+offset_top = 14.0
+offset_right = 51.0
+offset_bottom = 24.0
+scale = Vector2(0.4, 0.4)
+value = 100.0
+texture_under = ExtResource("3_tuyoq")
+texture_progress = ExtResource("4_fjrip")
+
+[node name="stamina_bar" type="TextureProgressBar" parent="." unique_id=1763359272]
+modulate = Color(0.16078432, 1, 1, 1)
+offset_left = -13.000001
+offset_top = 19.0
+offset_right = 51.0
+offset_bottom = 29.0
+scale = Vector2(0.4, 0.4)
+max_value = 50.0
+value = 50.0
+texture_under = SubResource("CompressedTexture2D_tuyoq")
+texture_progress = SubResource("CompressedTexture2D_fjrip")
+
+[node name="actions" type="Node" parent="." unique_id=1293414967]
+script = ExtResource("5_tuyoq")
+
+[node name="slash" parent="actions" unique_id=2008267115 instance=ExtResource("5_qlg0r")]
+display_name = "slash"
+description = "s"
+damage = 10
+cost = 7
+
+[node name="slap" parent="actions" unique_id=923638822 instance=ExtResource("5_qlg0r")]
+display_name = "slap"
+description = "s"
+damage = 5
+cost = 10
+
+[node name="heal" parent="actions" unique_id=1555499959 instance=ExtResource("5_qlg0r")]
+display_name = "heal"
+description = "heals"
+type = 1
+damage = 20
+heal_amnt = 1
+cost = 20
+
+[node name="biden_blast" parent="actions" unique_id=1313449993 instance=ExtResource("5_qlg0r")]
+display_name = "biden_blast"
+description = "s"
+damage = 67
+cost = 35
+
+[node name="pharaohs_curse" parent="actions" unique_id=1709239245 instance=ExtResource("5_qlg0r")]
+cost = 40
+
+[node name="defend" parent="actions" unique_id=1338845443 instance=ExtResource("5_qlg0r")]
+display_name = "block"
+description = "s"
+type = 3
+cost = 10
+turn_wait = 3

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bygtabh3rov0g"]
+
+[ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="1_u7r83"]
+[ext_resource type="Script" uid="uid://cdh3yq6jbunl5" path="res://unused/action_button.gd" id="2_ffiw1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ternb"]
+atlas = ExtResource("1_u7r83")
+region = Rect2(3.4, 4.3, 100, 100)
+
+[node name="action_button" type="TextureButton" unique_id=1759266082]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = 18.0
+offset_right = 65.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+size_flags_horizontal = 8
+size_flags_vertical = 2
+texture_normal = SubResource("AtlasTexture_ternb")
+stretch_mode = 0
+script = ExtResource("2_ffiw1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1217480305]
+layout_mode = 0
+offset_left = 60.000008
+offset_top = 23.333332
+offset_right = 190.0
+offset_bottom = 63.333332

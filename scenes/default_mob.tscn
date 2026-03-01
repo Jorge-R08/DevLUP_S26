@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c6cg33os57pgm"]
+
+[ext_resource type="Texture2D" uid="uid://8htbaoyqqxw7" path="res://assets/testing/sugoma.png" id="1_japp3"]
+[ext_resource type="Script" uid="uid://dhh1710rmdqtu" path="res://scripts/default_mob.gd" id="1_jfa71"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jfa71"]
+load_path = "res://.godot/imported/healthbarUnder.png-63e3ceacc15a6eddb3583b4fc970b986.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ufid7"]
+load_path = "res://.godot/imported/healthbarProgress.png-cb37a4bb36663e60a2670e1e0570901e.ctex"
+
+[node name="default_mob" type="Node2D" unique_id=1726908891]
+script = ExtResource("1_jfa71")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1206845249]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_japp3")
+
+[node name="health_bar" type="TextureProgressBar" parent="." unique_id=1087996292]
+offset_left = -13.0
+offset_top = 26.0
+offset_right = 51.0
+offset_bottom = 36.0
+scale = Vector2(0.4, 0.4)
+value = 100.0
+texture_under = SubResource("CompressedTexture2D_jfa71")
+texture_progress = SubResource("CompressedTexture2D_ufid7")
+
+[node name="actions" type="Node" parent="." unique_id=1953926423]

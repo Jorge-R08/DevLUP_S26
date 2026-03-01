@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ck3svbdvwtbc0"]
+
+[ext_resource type="Script" uid="uid://ecpd52soen54" path="res://scripts/action.gd" id="1_dnasc"]
+
+[node name="Action" type="Node2D" unique_id=1555499959]
+script = ExtResource("1_dnasc")

@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://c5x1sdgu3nqsd"]
+
+[ext_resource type="Script" uid="uid://dl62m134f5rhs" path="res://scripts/game_manager.gd" id="1_oo155"]
+[ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="1_udu3i"]
+[ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="2_oo155"]
+[ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="3_eaq8r"]
+[ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_eaq8r"]
+[ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="5_ternb"]
+[ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="7_q8mjp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eaq8r"]
+atlas = ExtResource("5_eaq8r")
+region = Rect2(2, 4, 99, 99)
+
+[node name="game_manager" type="Node2D" unique_id=1518088783 node_paths=PackedStringArray("dialogue_manager", "player_char", "mob_char")]
+script = ExtResource("1_oo155")
+dialogue_manager = NodePath("UI/DialogueManager")
+player_char = NodePath("Player")
+mob_char = NodePath("mob")
+
+[node name="Player" parent="." unique_id=2054013610 node_paths=PackedStringArray("actions") instance=ExtResource("2_oo155")]
+z_index = 1
+position = Vector2(253, 300)
+scale = Vector2(4, 4)
+actions = {
+"biden_blast": NodePath("actions/biden_blast"),
+"heal": NodePath("actions/heal"),
+"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"slap": NodePath("actions/slap"),
+"slash": NodePath("actions/slash")
+}
+
+[node name="mob" parent="." unique_id=1726908891 instance=ExtResource("3_eaq8r")]
+position = Vector2(1028, 303)
+scale = Vector2(4, 4)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=456155950]
+layer = -1
+
+[node name="background" type="TextureRect" parent="UI" unique_id=190215561]
+z_index = -2
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_udu3i")
+expand_mode = 1
+
+[node name="DialogueManager" parent="UI" unique_id=1730137533 instance=ExtResource("5_ternb")]
+
+[node name="action_buttons" type="Node" parent="UI" unique_id=2039395836]
+
+[node name="slash_btn" type="TextureButton" parent="UI/action_buttons" unique_id=575615170]
+offset_left = 70.0
+offset_top = 449.0
+offset_right = 169.0
+offset_bottom = 548.0
+scale = Vector2(2, 1.2)
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/slash_btn" unique_id=468899244]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 30.0
+offset_top = 36.666668
+offset_right = 100.0
+offset_bottom = 76.66667
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("7_q8mjp")
+theme_override_font_sizes/normal_font_size = 16
+text = "slash"
+
+[node name="slap_btn" type="TextureButton" parent="UI/action_buttons" unique_id=14333490]
+offset_left = 293.0
+offset_top = 452.0
+offset_right = 392.0
+offset_bottom = 551.0
+scale = Vector2(2, 1.2)
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/slap_btn" unique_id=1958511456]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 36.666664
+offset_right = 72.0
+offset_bottom = 76.666664
+mouse_filter = 2
+text = "slap"
+
+[node name="heal_btn" type="TextureButton" parent="UI/action_buttons" unique_id=1383083571]
+offset_left = 288.0
+offset_top = 570.0
+offset_right = 387.0
+offset_bottom = 669.0
+scale = Vector2(2, 1.2)
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/heal_btn" unique_id=1622215665]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 33.333332
+offset_right = 68.0
+offset_bottom = 73.33333
+mouse_filter = 2
+text = "heal"
+
+[node name="biden_blast_btn" type="TextureButton" parent="UI/action_buttons" unique_id=643729323]
+offset_left = 70.0
+offset_top = 569.0
+offset_right = 169.0
+offset_bottom = 668.0
+scale = Vector2(2, 1.2)
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/biden_blast_btn" unique_id=1999915917]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "Biden Blast"
+
+[node name="pharaoh_btn" type="TextureButton" parent="UI/action_buttons" unique_id=877487679]
+offset_left = 509.0
+offset_top = 571.0
+offset_right = 608.0
+offset_bottom = 670.0
+scale = Vector2(2, 1.2)
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/pharaoh_btn" unique_id=1381291668]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "Pharaoh's Curse"
+
+[connection signal="action_performed" from="." to="." method="_on_action_performed"]
+[connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/slap_btn" to="." method="_on_slap_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/heal_btn" to="." method="_on_heal_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/biden_blast_btn" to="." method="_on_biden_blast_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/pharaoh_btn" to="." method="_on_pharaoh_btn_pressed"]
