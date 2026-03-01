@@ -47,16 +47,21 @@ func trigger(target : Node2D):
 		char.increase_stamina(STAMINA_GAIN_ON_ACTION)
 		curr_turn_wait = TURN_WAIT_RESET-1
 	elif char.name == "mob":
+		print("char name is MOBBBBBBBBBBBBBBB")
 		mob_attack.emit(display_name)
 	
 	match type:
 		action_type.ATTACK:
 			char.animation_player.play("attack")
 			print("ATTACK ACTION PERFORMED")
-			if char.curse_blinded and !choose([true, false]):
+			if char.curse_blinded and !choose([true, true, true, false, false]):
 				print("ATTACK MISSSED")
 			else:
 				target.take_damage(damage)
+			if char.name == "Player" and display_name == "biden_blast":
+				char.stunned = 1
+			if char.name == "Player" and display_name == "pharaohs_curse":
+				target.curse_blinded = 4
 		action_type.HEAL:
 			print("HEAL ACTION PERFORMED")
 			char.heal(heal_amnt)

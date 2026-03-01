@@ -1,6 +1,6 @@
 extends Node2D
 
-signal action_performed
+signal action_performed()
 
 const MIN_MOB_THINK_TIME = 0.7
 const MAX_MOB_THINK_TIME = 1.6
@@ -64,12 +64,19 @@ func next_turn():
 		mob_char.end_turn()
 		player_char.start_turn()
 		curr_char = characters.PLAYER
-		for btn in _action_buttons.get_children():
-			if (player_char.actions[btn.get_child(0).text].curr_turn_wait >= player_char.actions[btn.get_child(0).text].turn_wait):
-				btn.disabled = false
+		
+		if player_char.stunned > 0:
+			print("STUNNED")
+		else:
+			for btn in _action_buttons.get_children():
+				if (player_char.actions[btn.get_child(0).text].curr_turn_wait >= player_char.actions[btn.get_child(0).text].turn_wait):
+					btn.disabled = false
 							
 	if curr_char == characters.PLAYER:
-		await action_performed
+		if player_char.stunned <= 0:
+			await action_performed
+		else:
+			player_char.stunned =- 1
 		await  get_tree().create_timer(AFTER_ACTION_WAIT_TIME).timeout
 	elif curr_char == characters.MOB:
 		mob_char.find_child("think_sprite").visible = true
@@ -81,6 +88,7 @@ func next_turn():
 		
 		var mob_action : Action = mob_char.decide_action()
 		mob_action.trigger(player_char)
+
 		
 		await  get_tree().create_timer(AFTER_ACTION_WAIT_TIME).timeout
 		
@@ -106,12 +114,20 @@ func _on_pharaoh_btn_pressed() -> void:
 	player_char.actions["pharaohs curse"].trigger(mob_char)
 	action_performed.emit()
 
+func _on_skip_btn_pressed() -> void:
+	player_char.actions["skip"].trigger(player_char)
+	action_performed.emit()
+
+
 func _on_action_performed() -> void:
 	for btn in _action_buttons.get_children():
 		btn.disabled = true
 	for action in player_char.actions:
 		player_char.actions[action].curr_turn_wait = min(player_char.actions[action].turn_wait, player_char.actions[action].curr_turn_wait+1)
 	
+func choose(array : Array):
+	array.shuffle()
+	return array[0]
 
 """
 #dialogue use sample 
@@ -144,7 +160,3 @@ func _on_WeirdButton_pressed() -> void:
 		"At least it's not a goose,{p=0.2} now THAT's [shake]terrifying[/shake]"
 	])
 """
-
-
-func _on_mob_mob_action(action: Action) -> void:
-	pass # Replace with function body.

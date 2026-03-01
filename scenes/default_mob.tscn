@@ -101,6 +101,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_fjrip"]
+resource_local_to_scene = true
 resource_name = "attack"
 length = 0.4
 tracks/0/type = "value"
@@ -161,7 +162,7 @@ tracks/0/keys = {
 "values": [0.0, -0.17453292, 0.17453292519943295, 0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_jfa71"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_feusp"]
 _data = {
 &"RESET": SubResource("Animation_smehm"),
 &"attack": SubResource("Animation_fjrip"),
@@ -220,7 +221,7 @@ cost = 10
 turn_wait = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2145972409]
-libraries/ = SubResource("AnimationLibrary_jfa71")
+libraries/ = SubResource("AnimationLibrary_feusp")
 autoplay = &"RESET"
 
 [node name="action_label" type="TextureRect" parent="." unique_id=999322299]

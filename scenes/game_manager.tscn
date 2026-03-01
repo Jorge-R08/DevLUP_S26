@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="1_udu3i"]
 [ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="2_oo155"]
 [ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="3_eaq8r"]
-[ext_resource type="Script" uid="uid://gq8suuf4xdks" path="res://scripts/tutorial_mob.gd" id="4_jdad8"]
+[ext_resource type="Script" uid="uid://bnef4iddk7cjw" path="res://scripts/tank_mob.gd" id="4_jdad8"]
 [ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_eaq8r"]
 [ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="5_ternb"]
 [ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="7_q8mjp"]
@@ -13,7 +13,7 @@
 atlas = ExtResource("5_eaq8r")
 region = Rect2(2, 4, 99, 99)
 
-[node name="game_manager" type="Node2D" unique_id=1518088783 node_paths=PackedStringArray("dialogue_manager", "player_char", "mob_char")]
+[node name="tutorial_lvl" type="Node2D" unique_id=1518088783 node_paths=PackedStringArray("dialogue_manager", "player_char", "mob_char")]
 script = ExtResource("1_oo155")
 dialogue_manager = NodePath("UI/DialogueManager")
 player_char = NodePath("Player")
@@ -33,12 +33,12 @@ actions = {
 "slash": NodePath("actions/slash")
 }
 is_player = true
-curse_blinded = false
 
-[node name="mob" parent="." unique_id=1726908891 node_paths=PackedStringArray("actions") instance=ExtResource("3_eaq8r")]
+[node name="mob" parent="." unique_id=1726908891 node_paths=PackedStringArray("player", "actions") instance=ExtResource("3_eaq8r")]
 position = Vector2(1028, 303)
 scale = Vector2(4, 4)
 script = ExtResource("4_jdad8")
+player = NodePath("../Player")
 actions = {
 "defend": NodePath("actions/defend"),
 "heal": NodePath("actions/heal"),
@@ -154,9 +154,28 @@ offset_bottom = 83.33333
 mouse_filter = 2
 text = "pharaohs curse"
 
+[node name="skip_btn" type="TextureButton" parent="UI/action_buttons" unique_id=2132957490]
+offset_left = 512.0
+offset_top = 451.0
+offset_right = 611.0
+offset_bottom = 550.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/skip_btn" unique_id=522345454]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "skip"
+
 [connection signal="action_performed" from="." to="." method="_on_action_performed"]
 [connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/slap_btn" to="." method="_on_slap_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/heal_btn" to="." method="_on_heal_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/biden_blast_btn" to="." method="_on_biden_blast_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/pharaoh_btn" to="." method="_on_pharaoh_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/skip_btn" to="." method="_on_skip_btn_pressed"]

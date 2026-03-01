@@ -6,6 +6,7 @@ extends Node2D
 var curr_health : int = max_health
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+const CURSE_BLIND_TURNS = 4
 
 @onready var _health_bar: TextureProgressBar = $health_bar
 @onready var label_timer: Timer = $action_label/label_timer
@@ -13,6 +14,7 @@ var curr_health : int = max_health
 
 @export var is_player : bool
 @export var curse_blinded : bool = false
+var curr_curse_blind_turns = 0
 
 #signal mob_action(action : Action)
 
@@ -26,12 +28,14 @@ func _process(delta: float) -> void:
 	pass
 	
 func on_mob_attack(action_name : String):
+	print("on mob attack")
 	action_label.find_child("RichTextLabel").text = action_name
 	action_label.visible = true #maybe add a twink
 	label_timer.start()
 	
 func start_turn():
-	print("Mob turn start")
+	print("Mob turn start -- MOB HEALTH: ", curr_health)
+	
 
 func end_turn():
 	print("Mob turn end")

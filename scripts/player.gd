@@ -17,6 +17,7 @@ var curr_curse_blind_turns = 0
 
 @export var is_player : bool
 
+var stunned : int = 0
 
 #status effects
 @export var curse_blinded : bool = false
