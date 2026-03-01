@@ -45,6 +45,8 @@ actions = {
 "pharaohs_curse": NodePath("actions/pharaohs_curse"),
 "slash": NodePath("actions/slash")
 }
+max_health = 10
+is_tutorial_mob = true
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=456155950]
 layer = -1

@@ -6,7 +6,7 @@ extends Node2D
 var curr_health : int = max_health
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
+@export var is_tutorial_mob : bool = false
 const CURSE_BLIND_TURNS = 4
 
 var blocking : bool = false

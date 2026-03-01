@@ -166,7 +166,12 @@ func _on_WeirdButton_pressed() -> void:
 
 func _on_mob_mob_dead() -> void:
 	game_over = true
-
+	if mob_char.is_tutorial_mob:
+		await get_tree().create_timer(5.0).timeout
+		call_deferred("_go_to_next_scene")
+		
+func _go_to_next_scene() -> void:
+	get_tree().change_scene_to_file("res://scenes/boss_lvl.tscn")
 
 func _on_player_player_dead() -> void:
 	game_over = true
@@ -174,4 +179,3 @@ func _on_player_player_dead() -> void:
 func _on_mob_summoner_dead() -> void:
 	print("SUMMON YETEHAYU")
 	game_over = true
-	
