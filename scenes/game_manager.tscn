@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="1_udu3i"]
 [ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="2_oo155"]
 [ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="3_eaq8r"]
-[ext_resource type="Script" uid="uid://jmgmbwvkwith" path="res://scripts/summoner_mob.gd" id="4_jdad8"]
+[ext_resource type="Script" uid="uid://gq8suuf4xdks" path="res://scripts/tutorial_mob.gd" id="4_jdad8"]
 [ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_eaq8r"]
 [ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="5_ternb"]
 [ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="7_q8mjp"]
@@ -21,7 +21,7 @@ mob_char = NodePath("mob")
 
 [node name="Player" parent="." unique_id=2054013610 node_paths=PackedStringArray("actions") instance=ExtResource("2_oo155")]
 z_index = 1
-position = Vector2(253, 300)
+position = Vector2(250, 300)
 scale = Vector2(4, 4)
 actions = {
 "biden blast": NodePath("actions/biden_blast"),
@@ -34,11 +34,10 @@ actions = {
 }
 is_player = true
 
-[node name="mob" parent="." unique_id=1726908891 node_paths=PackedStringArray("player", "actions") instance=ExtResource("3_eaq8r")]
+[node name="mob" parent="." unique_id=1726908891 node_paths=PackedStringArray("actions") instance=ExtResource("3_eaq8r")]
 position = Vector2(1028, 303)
 scale = Vector2(4, 4)
 script = ExtResource("4_jdad8")
-player = NodePath("../Player")
 actions = {
 "big_hit": NodePath("actions/big_hit"),
 "defend": NodePath("actions/defend"),
@@ -195,7 +194,6 @@ text = "defend
 [connection signal="action_performed" from="." to="." method="_on_action_performed"]
 [connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
 [connection signal="mob_dead" from="mob" to="." method="_on_mob_mob_dead"]
-[connection signal="summoner_dead" from="mob" to="." method="_on_mob_summoner_dead"]
 [connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/slap_btn" to="." method="_on_slap_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/heal_btn" to="." method="_on_heal_btn_pressed"]

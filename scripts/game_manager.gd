@@ -8,6 +8,7 @@ const AFTER_ACTION_WAIT_TIME = 1
 
 @onready var _action_buttons: Node = $UI/action_buttons
 @export var dialogue_manager: DialogueManager 
+@onready var blast: AnimatedSprite2D
 
 @export var player_char : Node2D
 @export var mob_char : Node2D
@@ -27,17 +28,13 @@ var curr_char : characters = characters.NULL
 func _ready() -> void:
 	print("Game Starting")
 	mob_char.find_child("think_sprite").visible = false
-	#await get_tree().create_timer(1).timeout
-	#dialogue_manager.show_messages([
-		#"let's see...",
-		#"...",
-	#])	
+	blast = player_char.find_child("blast")
 	next_turn()
 
 func next_turn():
 	if game_over:
 		return
-		
+	
 	if player_char.curse_blinded:
 		print("player curse blinded")
 		player_char.curr_curse_blind_turns = min(player_char.curr_curse_blind_turns+1, player_char.CURSE_BLIND_TURNS)
@@ -109,6 +106,8 @@ func _on_heal_btn_pressed() -> void:
 func _on_biden_blast_btn_pressed() -> void:
 	player_char.actions["biden blast"].trigger(mob_char)
 	action_performed.emit()
+	blast.play("default")
+	blast.visible = true
 
 func _on_pharaoh_btn_pressed() -> void:
 	player_char.actions["pharaohs curse"].trigger(mob_char)
@@ -175,3 +174,4 @@ func _on_player_player_dead() -> void:
 func _on_mob_summoner_dead() -> void:
 	print("SUMMON YETEHAYU")
 	game_over = true
+	

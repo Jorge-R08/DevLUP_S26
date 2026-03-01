@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d17b8rja7an68" path="res://assets/testing/healthbarProgress.png" id="4_fjrip"]
 [ext_resource type="PackedScene" uid="uid://ck3svbdvwtbc0" path="res://scenes/action.tscn" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://ecpd52soen54" path="res://scripts/action.gd" id="5_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://cuc82lm0rggw6" path="res://assets/Attacks_Sprite_sheet.png" id="7_fjrip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("2_qlg0r")
@@ -100,6 +101,42 @@ _data = {
 &"hurt": SubResource("Animation_smehm")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("7_fjrip")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("7_fjrip")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("7_fjrip")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+atlas = ExtResource("7_fjrip")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8ls1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ej7")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_oprun")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="Node2D" unique_id=1548218120 node_paths=PackedStringArray("actions")]
 script = ExtResource("1_dqkch")
 actions = {
@@ -115,7 +152,7 @@ actions = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1200667129]
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 autoplay = "default"
-frame_progress = 0.88440496
+frame_progress = 0.8268287
 
 [node name="health_bar" type="TextureProgressBar" parent="." unique_id=1540150599]
 offset_left = -12.999999
@@ -189,4 +226,12 @@ cost = 40
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1161657081]
 libraries/ = SubResource("AnimationLibrary_smehm")
 
+[node name="blast" type="AnimatedSprite2D" parent="." unique_id=1620363026]
+visible = false
+position = Vector2(18, -10)
+sprite_frames = SubResource("SpriteFrames_a8ls1")
+frame = 3
+frame_progress = 1.0
+
 [connection signal="toggle_blocking" from="actions/defend" to="." method="_on_defend_toggle_blocking"]
+[connection signal="animation_finished" from="blast" to="." method="_on_blast_animation_finished"]

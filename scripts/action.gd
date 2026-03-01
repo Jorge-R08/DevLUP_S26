@@ -67,6 +67,8 @@ func trigger(target : Node2D):
 					charge_completed = false
 			if char.name == "Player" and display_name == "biden_blast":
 				char.stunned = 1
+				char.find_child("blast").play("default")
+				char.find_child("blast").visible
 			if char.name == "mob" and display_name == "pharaohs_curse":
 				print("pharaphs curse appliedddddddddddddddd")
 				print("target curse: ", target)

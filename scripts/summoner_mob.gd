@@ -7,6 +7,7 @@ var pharaohs_cooldown : int = 2
 signal summoner_dead
 
 @export var player : Node2D
+@onready var curse: AnimatedSprite2D = $curse
 
 
 func take_damage(dmg : int):
@@ -30,7 +31,14 @@ func decide_action() -> Action:
 		else:
 			pharaohs_cooldown = 0
 			print("THE PHARAOHS CURSE")
+			curse.play("start")
+			curse.visible = true
 			return (actions["pharaohs_curse"])
 	else:
 		pharaohs_cooldown += 1
 		return (actions["heal"])
+
+
+func _on_curse_animation_finished() -> void:
+	if curse.animation == "start":
+		curse.visible = false

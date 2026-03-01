@@ -3,6 +3,7 @@ extends Node2D
 const CURSE_BLIND_TURNS = 4
 
 @export var actions : Dictionary[String, Action]
+@onready var blast: AnimatedSprite2D = $blast
 
 @export var max_health : int = 100
 @export var max_stamina : int = 50
@@ -70,3 +71,8 @@ func increase_stamina(amnt : int):
 func _on_defend_toggle_blocking(to_player : bool) -> void:
 	if to_player:
 		blocking = true
+
+
+func _on_blast_animation_finished() -> void:
+	if blast.animation == "default":
+		blast.visible = false

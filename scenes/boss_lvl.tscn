@@ -1,0 +1,385 @@
+[gd_scene format=3 uid="uid://bn4wtc48xw72b"]
+
+[ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="1_h2e4k"]
+[ext_resource type="Script" uid="uid://dl62m134f5rhs" path="res://scripts/game_manager.gd" id="1_h4g7e"]
+[ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="2_h4g7e"]
+[ext_resource type="Script" uid="uid://jmgmbwvkwith" path="res://scripts/summoner_mob.gd" id="3_i8ytu"]
+[ext_resource type="Texture2D" uid="uid://cksyigq7cfxu" path="res://assets/Animation_sheet_for_wizard.png" id="4_7geuk"]
+[ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_h8tem"]
+[ext_resource type="Texture2D" uid="uid://cuc82lm0rggw6" path="res://assets/Attacks_Sprite_sheet.png" id="6_ns2p0"]
+[ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="7_hxvxg"]
+[ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="8_cbn2u"]
+[ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="9_wd8tb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ktk1"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ijey"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qh2pv"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcd3r"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqpng"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtg3j"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eakf3"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4jf0"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ctge"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev5h7"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(128, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgxbe"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(160, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkifj"]
+atlas = ExtResource("4_7geuk")
+region = Rect2(192, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ns6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ktk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ijey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qh2pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcd3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqpng")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtg3j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eakf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4jf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ctge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev5h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgxbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkifj")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_l5arr"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8tnu4"]
+_data = {
+&"curse": SubResource("Animation_l5arr")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58wmw"]
+atlas = ExtResource("5_h8tem")
+region = Rect2(2, 4, 99, 99)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3odg"]
+atlas = ExtResource("6_ns2p0")
+region = Rect2(144, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1m8ln"]
+atlas = ExtResource("6_ns2p0")
+region = Rect2(176, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8qwu"]
+atlas = ExtResource("6_ns2p0")
+region = Rect2(208, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tthgp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3odg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m8ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8qwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3odg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m8ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8qwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3odg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1m8ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8qwu")
+}],
+"loop": false,
+"name": &"start",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4g7e"]
+atlas = ExtResource("5_h8tem")
+region = Rect2(2, 4, 99, 99)
+
+[node name="boss_lvl" type="Node2D" unique_id=1329100139 node_paths=PackedStringArray("dialogue_manager", "player_char", "mob_char")]
+script = ExtResource("1_h4g7e")
+dialogue_manager = NodePath("UI/DialogueManager")
+player_char = NodePath("Player")
+mob_char = NodePath("mob")
+
+[node name="Player" parent="." unique_id=1548218120 node_paths=PackedStringArray("actions") instance=ExtResource("1_h2e4k")]
+position = Vector2(250, 300)
+scale = Vector2(4, 4)
+actions = {
+"biden blast": NodePath("actions/biden_blast"),
+"defend": NodePath("actions/defend"),
+"heal": NodePath("actions/heal"),
+"pharaohs curse": NodePath("actions/pharaohs_curse"),
+"skip": NodePath("actions/skip"),
+"slap": NodePath("actions/slap"),
+"slash": NodePath("actions/slash")
+}
+is_player = true
+
+[node name="mob" parent="." unique_id=1726908891 node_paths=PackedStringArray("player", "actions") instance=ExtResource("2_h4g7e")]
+position = Vector2(1028, 303)
+scale = Vector2(4, 4)
+script = ExtResource("3_i8ytu")
+player = NodePath("../Player")
+actions = {
+"big_hit": NodePath("actions/big_hit"),
+"defend": NodePath("actions/defend"),
+"heal": NodePath("actions/heal"),
+"pharaohs_curse": NodePath("actions/pharaohs_curse"),
+"slash": NodePath("actions/slash")
+}
+
+[node name="AnimatedSprite2D" parent="mob" index="0" unique_id=1172630743]
+sprite_frames = SubResource("SpriteFrames_4ns6o")
+frame_progress = 0.0
+
+[node name="AnimationPlayer" parent="mob" index="3" unique_id=2145972409]
+libraries/summoner = SubResource("AnimationLibrary_8tnu4")
+
+[node name="action_label" parent="mob" index="4" unique_id=999322299]
+visible = true
+offset_left = -14.250001
+offset_top = 21.25
+offset_right = 84.75
+offset_bottom = 120.25
+texture = SubResource("AtlasTexture_58wmw")
+
+[node name="think_sprite" parent="mob" index="5" unique_id=625545048]
+position = Vector2(3.2499998, -23.25)
+
+[node name="curse" type="AnimatedSprite2D" parent="mob" unique_id=2092280888]
+visible = false
+z_index = 2
+position = Vector2(-193.25, 8.5)
+sprite_frames = SubResource("SpriteFrames_tthgp")
+animation = &"start"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1960978545]
+layer = -1
+
+[node name="background" type="TextureRect" parent="UI" unique_id=1101148960]
+z_index = -2
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("7_hxvxg")
+expand_mode = 1
+
+[node name="DialogueManager" parent="UI" unique_id=1151397926 instance=ExtResource("8_cbn2u")]
+
+[node name="action_buttons" type="Node" parent="UI" unique_id=1012389060]
+
+[node name="slash_btn" type="TextureButton" parent="UI/action_buttons" unique_id=320508710]
+offset_left = 70.0
+offset_top = 449.0
+offset_right = 169.0
+offset_bottom = 548.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_h4g7e")
+
+[node name="slash" type="RichTextLabel" parent="UI/action_buttons/slash_btn" unique_id=1707951740]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 30.0
+offset_top = 36.666668
+offset_right = 100.0
+offset_bottom = 76.66667
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("9_wd8tb")
+theme_override_font_sizes/normal_font_size = 16
+text = "slashggggg"
+
+[node name="slap_btn" type="TextureButton" parent="UI/action_buttons" unique_id=118595586]
+offset_left = 293.0
+offset_top = 452.0
+offset_right = 392.0
+offset_bottom = 551.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_58wmw")
+
+[node name="slap" type="RichTextLabel" parent="UI/action_buttons/slap_btn" unique_id=1451007654]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 36.666664
+offset_right = 72.0
+offset_bottom = 76.666664
+mouse_filter = 2
+text = "slap"
+
+[node name="heal_btn" type="TextureButton" parent="UI/action_buttons" unique_id=1600351299]
+offset_left = 288.0
+offset_top = 570.0
+offset_right = 387.0
+offset_bottom = 669.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_58wmw")
+
+[node name="heal" type="RichTextLabel" parent="UI/action_buttons/heal_btn" unique_id=747837412]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 33.333332
+offset_right = 68.0
+offset_bottom = 73.33333
+mouse_filter = 2
+text = "heal"
+
+[node name="biden_blast_btn" type="TextureButton" parent="UI/action_buttons" unique_id=718008671]
+offset_left = 70.0
+offset_top = 569.0
+offset_right = 169.0
+offset_bottom = 668.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_58wmw")
+
+[node name="biden blast" type="RichTextLabel" parent="UI/action_buttons/biden_blast_btn" unique_id=1199363337]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "biden blast"
+
+[node name="pharaoh_btn" type="TextureButton" parent="UI/action_buttons" unique_id=2001263233]
+offset_left = 509.0
+offset_top = 571.0
+offset_right = 608.0
+offset_bottom = 670.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_58wmw")
+
+[node name="pharaohs curse" type="RichTextLabel" parent="UI/action_buttons/pharaoh_btn" unique_id=875574830]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "pharaohs curse"
+
+[node name="skip_btn" type="TextureButton" parent="UI/action_buttons" unique_id=1867439212]
+offset_left = 512.0
+offset_top = 451.0
+offset_right = 611.0
+offset_bottom = 550.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_58wmw")
+
+[node name="skip" type="RichTextLabel" parent="UI/action_buttons/skip_btn" unique_id=552265093]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "skip"
+
+[node name="defend_btn" type="TextureButton" parent="UI/action_buttons" unique_id=1893093281]
+offset_left = 735.0
+offset_top = 448.0
+offset_right = 834.0
+offset_bottom = 547.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_58wmw")
+
+[node name="defend" type="RichTextLabel" parent="UI/action_buttons/defend_btn" unique_id=1356392603]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "defend
+"
+
+[connection signal="animation_finished" from="mob/curse" to="mob" method="_on_curse_animation_finished"]
+[connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/slap_btn" to="." method="_on_slap_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/heal_btn" to="." method="_on_heal_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/biden_blast_btn" to="." method="_on_biden_blast_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/pharaoh_btn" to="." method="_on_pharaoh_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/skip_btn" to="." method="_on_skip_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/defend_btn" to="." method="_on_defend_btn_pressed"]
+
+[editable path="mob"]
