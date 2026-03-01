@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bjpgq5ec7uv0n"]
+
+[ext_resource type="Script" uid="uid://ckihygvxc02be" path="res://Scripts/main_character.gd" id="1_ffy1q"]
+[ext_resource type="Texture2D" uid="uid://kpti3v0ierss" path="res://assets/testicle2/Top_down_dawg.png" id="2_udfat"]
+[ext_resource type="Texture2D" uid="uid://dsrjyekq02unx" path="res://assets/testing/healthbarUnder.png" id="3_8wgdu"]
+[ext_resource type="Texture2D" uid="uid://d17b8rja7an68" path="res://assets/testing/healthbarProgress.png" id="4_ppvyy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wgdu"]
+size = Vector2(52, 102)
+
+[node name="MainCharacter" type="CharacterBody2D" unique_id=1148853017 groups=["mc"]]
+script = ExtResource("1_ffy1q")
+
+[node name="MC" type="Sprite2D" parent="." unique_id=1162802466]
+position = Vector2(-4, -110)
+scale = Vector2(6, 6)
+texture = ExtResource("2_udfat")
+region_enabled = true
+region_rect = Rect2(9.08086, 7.2287, 14.0351, 17.621)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2142323214]
+position = Vector2(1, -104)
+shape = SubResource("RectangleShape2D_8wgdu")
+
+[node name="health_bar" type="TextureProgressBar" parent="." unique_id=1473756264]
+offset_left = -47.0
+offset_top = -50.0
+offset_right = 17.0
+offset_bottom = -40.0
+scale = Vector2(1.685, 1.685)
+value = 100.0
+texture_under = ExtResource("3_8wgdu")
+texture_progress = ExtResource("4_ppvyy")
