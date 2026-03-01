@@ -115,7 +115,7 @@ actions = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1200667129]
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 autoplay = "default"
-frame_progress = 0.04934051
+frame_progress = 0.88440496
 
 [node name="health_bar" type="TextureProgressBar" parent="." unique_id=1540150599]
 offset_left = -12.999999
@@ -174,7 +174,6 @@ display_name = "block"
 description = "s"
 type = 3
 cost = 10
-turn_wait = 4
 
 [node name="biden_blast" parent="actions" unique_id=1313449993 instance=ExtResource("5_qlg0r")]
 display_name = "biden_blast"

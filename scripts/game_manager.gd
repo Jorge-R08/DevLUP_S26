@@ -54,7 +54,7 @@ func next_turn():
 		player_char.start_turn()
 		curr_char = characters.PLAYER
 		for btn in _action_buttons.get_children():
-			if (player_char.actions[btn.get_child(0).text].turn_wait == 1):
+			if (player_char.actions[btn.get_child(0).name].turn_wait == 1):
 				btn.disabled = false
 	elif curr_char == characters.PLAYER:
 		player_char.end_turn()
@@ -69,7 +69,7 @@ func next_turn():
 			print("STUNNED")
 		else:
 			for btn in _action_buttons.get_children():
-				if (player_char.actions[btn.get_child(0).text].curr_turn_wait >= player_char.actions[btn.get_child(0).text].turn_wait):
+				if (player_char.actions[btn.get_child(0).name].curr_turn_wait >= player_char.actions[btn.get_child(0).name].turn_wait):
 					btn.disabled = false
 							
 	if curr_char == characters.PLAYER:
@@ -118,6 +118,9 @@ func _on_skip_btn_pressed() -> void:
 	player_char.actions["skip"].trigger(player_char)
 	action_performed.emit()
 
+func _on_defend_btn_pressed() -> void:
+	player_char.actions["defend"].trigger(player_char)
+	action_performed.emit()
 
 func _on_action_performed() -> void:
 	for btn in _action_buttons.get_children():
@@ -160,3 +163,15 @@ func _on_WeirdButton_pressed() -> void:
 		"At least it's not a goose,{p=0.2} now THAT's [shake]terrifying[/shake]"
 	])
 """
+
+
+func _on_mob_mob_dead() -> void:
+	game_over = true
+
+
+func _on_player_player_dead() -> void:
+	game_over = true
+
+func _on_mob_summoner_dead() -> void:
+	print("SUMMON YETEHAYU")
+	game_over = true

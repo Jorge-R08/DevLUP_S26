@@ -7,39 +7,72 @@
 [ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="4_vuo4q"]
 [ext_resource type="Texture2D" uid="uid://h6u3ll1sm06k" path="res://icon.svg" id="6_feusp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufid7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_feusp"]
 atlas = ExtResource("2_jfa71")
-region = Rect2(0, 0, 24, 24)
+region = Rect2(0, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fht01"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyk1i"]
 atlas = ExtResource("2_jfa71")
-region = Rect2(24, 0, 24, 24)
+region = Rect2(24, 24, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vuo4q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gvln"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7hgd"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb7su"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wrdj"]
 atlas = ExtResource("2_jfa71")
 region = Rect2(48, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_feusp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymqgd"]
 atlas = ExtResource("2_jfa71")
-region = Rect2(72, 0, 24, 24)
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ndxa"]
+atlas = ExtResource("2_jfa71")
+region = Rect2(0, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pb7su"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ufid7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fht01")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vuo4q")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_feusp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyk1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gvln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7hgd")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pb7su")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wrdj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymqgd")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_0ndxa")
+}],
+"loop": false,
+"name": &"die",
 "speed": 5.0
 }]
 
@@ -99,6 +132,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.17453292]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_fjrip"]
 resource_local_to_scene = true
@@ -145,6 +190,22 @@ tracks/1/keys = {
 "values": [Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1), Color(18.892157, 18.892157, 18.892157, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_feusp"]
+resource_name = "summon"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.1415927, 6.2831855]
+}
+
 [sub_resource type="Animation" id="Animation_pb7su"]
 resource_name = "think"
 length = 0.6
@@ -167,6 +228,7 @@ _data = {
 &"RESET": SubResource("Animation_smehm"),
 &"attack": SubResource("Animation_fjrip"),
 &"hurt": SubResource("Animation_ur7pv"),
+&"summon": SubResource("Animation_feusp"),
 &"think": SubResource("Animation_pb7su")
 }
 
@@ -183,9 +245,13 @@ actions = {
 "pharaohs_curse": NodePath("actions/pharaohs_curse"),
 "slash": NodePath("actions/slash")
 }
+max_health = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1172630743]
 sprite_frames = SubResource("SpriteFrames_pb7su")
+autoplay = "default"
+frame_progress = 0.58433145
+flip_h = true
 
 [node name="health_bar" type="TextureProgressBar" parent="." unique_id=1087996292]
 offset_left = -13.0
@@ -212,6 +278,7 @@ type = 1
 heal_amnt = 20
 
 [node name="pharaohs_curse" parent="actions" unique_id=872569760 instance=ExtResource("3_vuo4q")]
+display_name = "pharaohs_curse"
 cost = 40
 
 [node name="defend" parent="actions" unique_id=2006819646 instance=ExtResource("3_vuo4q")]
@@ -225,6 +292,7 @@ turn_wait = 4
 display_name = "big_hit"
 description = "big ahh hit"
 damage = 40
+charge_up = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2145972409]
 libraries/ = SubResource("AnimationLibrary_feusp")
@@ -262,4 +330,7 @@ rotation = 0.17453292
 scale = Vector2(0.043975517, 0.043975517)
 texture = ExtResource("6_feusp")
 
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="toggle_blocking" from="actions/defend" to="." method="_on_defend_toggle_blocking"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="action_label/label_timer" to="." method="_on_label_timer_timeout"]

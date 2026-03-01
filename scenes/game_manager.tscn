@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="1_udu3i"]
 [ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="2_oo155"]
 [ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="3_eaq8r"]
-[ext_resource type="Script" uid="uid://bnef4iddk7cjw" path="res://scripts/tank_mob.gd" id="4_jdad8"]
+[ext_resource type="Script" uid="uid://jmgmbwvkwith" path="res://scripts/summoner_mob.gd" id="4_jdad8"]
 [ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_eaq8r"]
 [ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="5_ternb"]
 [ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="7_q8mjp"]
@@ -40,6 +40,7 @@ scale = Vector2(4, 4)
 script = ExtResource("4_jdad8")
 player = NodePath("../Player")
 actions = {
+"big_hit": NodePath("actions/big_hit"),
 "defend": NodePath("actions/defend"),
 "heal": NodePath("actions/heal"),
 "pharaohs_curse": NodePath("actions/pharaohs_curse"),
@@ -69,7 +70,7 @@ scale = Vector2(2, 1.2)
 disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/slash_btn" unique_id=468899244]
+[node name="slash" type="RichTextLabel" parent="UI/action_buttons/slash_btn" unique_id=468899244]
 z_index = 1
 texture_filter = 1
 layout_mode = 0
@@ -80,7 +81,7 @@ offset_bottom = 76.66667
 mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("7_q8mjp")
 theme_override_font_sizes/normal_font_size = 16
-text = "slash"
+text = "slashggggg"
 
 [node name="slap_btn" type="TextureButton" parent="UI/action_buttons" unique_id=14333490]
 offset_left = 293.0
@@ -91,7 +92,7 @@ scale = Vector2(2, 1.2)
 disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/slap_btn" unique_id=1958511456]
+[node name="slap" type="RichTextLabel" parent="UI/action_buttons/slap_btn" unique_id=1958511456]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 36.666664
@@ -109,7 +110,7 @@ scale = Vector2(2, 1.2)
 disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/heal_btn" unique_id=1622215665]
+[node name="heal" type="RichTextLabel" parent="UI/action_buttons/heal_btn" unique_id=1622215665]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 33.333332
@@ -127,7 +128,7 @@ scale = Vector2(2, 1.2)
 disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/biden_blast_btn" unique_id=1999915917]
+[node name="biden blast" type="RichTextLabel" parent="UI/action_buttons/biden_blast_btn" unique_id=1999915917]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 23.333332
@@ -145,7 +146,7 @@ scale = Vector2(2, 1.2)
 disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/pharaoh_btn" unique_id=1381291668]
+[node name="pharaohs curse" type="RichTextLabel" parent="UI/action_buttons/pharaoh_btn" unique_id=1381291668]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 23.333332
@@ -163,7 +164,7 @@ scale = Vector2(2, 1.2)
 disabled = true
 texture_normal = SubResource("AtlasTexture_eaq8r")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/action_buttons/skip_btn" unique_id=522345454]
+[node name="skip" type="RichTextLabel" parent="UI/action_buttons/skip_btn" unique_id=522345454]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 23.333332
@@ -172,10 +173,33 @@ offset_bottom = 83.33333
 mouse_filter = 2
 text = "skip"
 
+[node name="defend_btn" type="TextureButton" parent="UI/action_buttons" unique_id=1345405812]
+offset_left = 735.0
+offset_top = 448.0
+offset_right = 834.0
+offset_bottom = 547.0
+scale = Vector2(2, 1.2)
+disabled = true
+texture_normal = SubResource("AtlasTexture_eaq8r")
+
+[node name="defend" type="RichTextLabel" parent="UI/action_buttons/defend_btn" unique_id=1869385820]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 23.333332
+offset_right = 96.0
+offset_bottom = 83.33333
+mouse_filter = 2
+text = "defend
+"
+
 [connection signal="action_performed" from="." to="." method="_on_action_performed"]
+[connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
+[connection signal="mob_dead" from="mob" to="." method="_on_mob_mob_dead"]
+[connection signal="summoner_dead" from="mob" to="." method="_on_mob_summoner_dead"]
 [connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/slap_btn" to="." method="_on_slap_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/heal_btn" to="." method="_on_heal_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/biden_blast_btn" to="." method="_on_biden_blast_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/pharaoh_btn" to="." method="_on_pharaoh_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/skip_btn" to="." method="_on_skip_btn_pressed"]
+[connection signal="pressed" from="UI/action_buttons/defend_btn" to="." method="_on_defend_btn_pressed"]

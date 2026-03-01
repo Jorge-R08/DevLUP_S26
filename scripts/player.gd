@@ -14,10 +14,13 @@ var curr_curse_blind_turns = 0
 @onready var _health_bar: TextureProgressBar = $health_bar
 @onready var _stamina_bar: TextureProgressBar = $stamina_bar
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var is_player : bool
 
 var stunned : int = 0
+
+signal player_dead
 
 #status effects
 @export var curse_blinded : bool = false
@@ -33,7 +36,8 @@ func _process(delta: float) -> void:
 	pass
 	
 func start_turn():
-	print("Player turn start -- Stamina: ", curr_stamina)
+	print("Player turn start -- Stamina: , --- HEALTH: ", curr_stamina, curr_health)
+	print("Curse blinded?: --- turns?: ", curse_blinded, curr_curse_blind_turns)
 
 func end_turn():
 	print("Player turn end")
@@ -43,7 +47,12 @@ func take_damage(dmg : int):
 	if blocking: dmg = dmg / 2
 	curr_health = max(0, curr_health-dmg)
 	_health_bar.value = curr_health
-	animation_player.play("hurt")
+	if curr_health > 0:
+		animation_player.play("hurt")
+	else:
+		animated_sprite_2d.play("die")
+		player_dead.emit()
+	
 	
 func heal(amnt : int):
 	#heal animation
@@ -58,5 +67,6 @@ func increase_stamina(amnt : int):
 	curr_stamina = min(max_stamina, curr_stamina+amnt)
 	_stamina_bar.value = curr_stamina	
 
-func _on_defend_toggle_blocking() -> void:
-	blocking = !blocking
+func _on_defend_toggle_blocking(to_player : bool) -> void:
+	if to_player:
+		blocking = true

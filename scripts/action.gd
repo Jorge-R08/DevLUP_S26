@@ -27,7 +27,7 @@ var charge_completed : bool =false
 
 @onready var action_label: TextureRect
 
-signal toggle_blocking
+signal toggle_blocking(to_player : bool)
 signal mob_attack(action_name : String)
 
 var curr_turn_wait : int = TURN_WAIT_RESET
@@ -53,7 +53,8 @@ func trigger(target : Node2D):
 	
 	match type:
 		action_type.ATTACK:
-			char.animation_player.play("attack")
+			if !charge_up:
+				char.animation_player.play("attack")
 			print("ATTACK ACTION PERFORMED")
 			if char.curse_blinded and !choose([true, true, true, false, false]):
 				print("ATTACK MISSSED")
@@ -66,10 +67,11 @@ func trigger(target : Node2D):
 					charge_completed = false
 			if char.name == "Player" and display_name == "biden_blast":
 				char.stunned = 1
-			if char.name == "Player" and display_name == "pharaohs_curse":
-				target.curse_blinded = 4
-			if char.name == "mob" and charge_up:
-				print("Charging up")
+			if char.name == "mob" and display_name == "pharaohs_curse":
+				print("pharaphs curse appliedddddddddddddddd")
+				print("target curse: ", target)
+				target.curse_blinded = true
+				target.curr_curse_blind_turns = 0
 		action_type.HEAL:
 			print("HEAL ACTION PERFORMED")
 			char.heal(heal_amnt)
@@ -77,6 +79,12 @@ func trigger(target : Node2D):
 			print("SPECIAL ACTION PERFORMED")
 		action_type.BLOCK:
 			print("BLOCK ACTION PERFORMED")
+			if char.name == "Player":
+				toggle_blocking.emit(true)
+			elif char.name == "mob":
+				toggle_blocking.emit(false)
+			else:
+				print("INVALID CHAR ANME FOR BLOCK")
 		action_type.SKIP:
 			print("SKIP ACTION PERFORMED")
 			char.increase_stamina(STAMINA_GAIN_ON_SKIP)
