@@ -11,13 +11,13 @@
 atlas = ExtResource("2_qlg0r")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
-atlas = ExtResource("2_qlg0r")
-region = Rect2(32, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
 atlas = ExtResource("2_qlg0r")
 region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_qlg0r")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
 atlas = ExtResource("2_qlg0r")
@@ -30,10 +30,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_smehm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ur7pv")
+"texture": SubResource("AtlasTexture_y4r1p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y4r1p")
+"texture": SubResource("AtlasTexture_ur7pv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d2wvv")
@@ -115,8 +115,7 @@ actions = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1200667129]
 sprite_frames = SubResource("SpriteFrames_3v2ag")
 autoplay = "default"
-frame = 2
-frame_progress = 0.7506019
+frame_progress = 0.04934051
 
 [node name="health_bar" type="TextureProgressBar" parent="." unique_id=1540150599]
 offset_left = -12.999999

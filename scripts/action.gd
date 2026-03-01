@@ -22,6 +22,8 @@ enum action_type {
 @export var cost : int
 @export var recoil : int = 0
 @export var turn_wait : int = TURN_WAIT_RESET
+@export var charge_up : bool = false
+var charge_completed : bool =false
 
 @onready var action_label: TextureRect
 
@@ -47,7 +49,6 @@ func trigger(target : Node2D):
 		char.increase_stamina(STAMINA_GAIN_ON_ACTION)
 		curr_turn_wait = TURN_WAIT_RESET-1
 	elif char.name == "mob":
-		print("char name is MOBBBBBBBBBBBBBBB")
 		mob_attack.emit(display_name)
 	
 	match type:
@@ -56,12 +57,19 @@ func trigger(target : Node2D):
 			print("ATTACK ACTION PERFORMED")
 			if char.curse_blinded and !choose([true, true, true, false, false]):
 				print("ATTACK MISSSED")
+			elif char.name == "mob" and charge_up and !charge_completed:
+				print("CHARGING UP A BIG ONE")
+				charge_completed = true
 			else:
 				target.take_damage(damage)
+				if char.name == "mob" and charge_up:
+					charge_completed = false
 			if char.name == "Player" and display_name == "biden_blast":
 				char.stunned = 1
 			if char.name == "Player" and display_name == "pharaohs_curse":
 				target.curse_blinded = 4
+			if char.name == "mob" and charge_up:
+				print("Charging up")
 		action_type.HEAL:
 			print("HEAL ACTION PERFORMED")
 			char.heal(heal_amnt)

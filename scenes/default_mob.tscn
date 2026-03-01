@@ -177,6 +177,7 @@ region = Rect2(2, 4, 99, 99)
 [node name="default_mob" type="Node2D" unique_id=1726908891 node_paths=PackedStringArray("actions")]
 script = ExtResource("1_jfa71")
 actions = {
+"big_hit": NodePath("actions/big_hit"),
 "defend": NodePath("actions/defend"),
 "heal": NodePath("actions/heal"),
 "pharaohs_curse": NodePath("actions/pharaohs_curse"),
@@ -219,6 +220,11 @@ description = "s"
 type = 3
 cost = 10
 turn_wait = 4
+
+[node name="big_hit" parent="actions" unique_id=2021115006 instance=ExtResource("3_vuo4q")]
+display_name = "big_hit"
+description = "big ahh hit"
+damage = 40
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2145972409]
 libraries/ = SubResource("AnimationLibrary_feusp")
