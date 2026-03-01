@@ -173,9 +173,14 @@ func _on_mob_mob_dead() -> void:
 func _go_to_next_scene() -> void:
 	get_tree().change_scene_to_file("res://scenes/boss_lvl.tscn")
 
+func _go_to_next_scene_oscar() -> void:
+	get_tree().change_scene_to_file("res://scenes/game_manager_2.tscn")
+
 func _on_player_player_dead() -> void:
 	game_over = true
 
 func _on_mob_summoner_dead() -> void:
 	print("SUMMON YETEHAYU")
 	game_over = true
+	await get_tree().create_timer(5.0).timeout
+	call_deferred("_go_to_next_scene_oscar")

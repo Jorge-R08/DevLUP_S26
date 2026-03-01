@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://byj77dtggpp7n"]
+
+[ext_resource type="Script" uid="uid://d145vpxyar2ci" path="res://scripts/enemy.gd" id="1_s7bn3"]
+[ext_resource type="Texture2D" uid="uid://dh873njqlgyow" path="res://assets/testicle2/Bones_shadow1_1.png" id="2_s7bn3"]
+[ext_resource type="Texture2D" uid="uid://ch0tqye53vquw" path="res://assets/testicle2/BrownFantasyUISheet.png" id="3_2hac7"]
+[ext_resource type="Texture2D" uid="uid://dsrjyekq02unx" path="res://assets/testing/healthbarUnder.png" id="4_5wwv6"]
+[ext_resource type="Texture2D" uid="uid://d17b8rja7an68" path="res://assets/testing/healthbarProgress.png" id="5_1vja8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6d4v"]
+atlas = ExtResource("3_2hac7")
+region = Rect2(1.63199, 5.51685, 102.17, 101.041)
+
+[node name="Enemy" type="Node2D" unique_id=1685856660]
+script = ExtResource("1_s7bn3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1283033512]
+scale = Vector2(3, 3)
+texture = ExtResource("2_s7bn3")
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=197316998]
+
+[node name="Rotator" type="Node2D" parent="." unique_id=993187574]
+
+[node name="BulletAttackTimer" type="Timer" parent="." unique_id=1503210963]
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=102866016]
+offset_left = 248.0
+offset_top = -162.0
+offset_right = 350.0
+offset_bottom = -61.0
+texture_normal = SubResource("AtlasTexture_e6d4v")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton" unique_id=118392440]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 25.0
+offset_right = 133.0
+offset_bottom = 71.0
+text = "Eyeball Shower"
+fit_content = true
+
+[node name="TextureButton2" type="TextureButton" parent="." unique_id=1400822206]
+offset_left = -313.0
+offset_top = -170.0
+offset_right = -211.0
+offset_bottom = -69.0
+texture_normal = SubResource("AtlasTexture_e6d4v")
+metadata/_edit_group_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton2" unique_id=562185743]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 35.0
+offset_right = 143.0
+offset_bottom = 81.0
+text = "Heal"
+fit_content = true
+
+[node name="TextureButton3" type="TextureButton" parent="." unique_id=1046064605]
+offset_left = 456.0
+offset_top = -164.0
+offset_right = 558.0
+offset_bottom = -63.0
+texture_normal = SubResource("AtlasTexture_e6d4v")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureButton3" unique_id=449000405]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 31.0
+offset_right = 135.0
+offset_bottom = 77.0
+text = "Blinker"
+fit_content = true
+
+[node name="health_bar" type="TextureProgressBar" parent="." unique_id=2047440676]
+offset_left = -200.0
+offset_top = -241.00002
+offset_right = -136.0
+offset_bottom = -231.00002
+scale = Vector2(6.61, 6.61)
+value = 100.0
+texture_under = ExtResource("4_5wwv6")
+texture_progress = ExtResource("5_1vja8")
+
+[connection signal="attack_started" from="." to="." method="_on_attack_started"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="BulletAttackTimer" to="." method="_on_bullet_attack_timer_timeout"]

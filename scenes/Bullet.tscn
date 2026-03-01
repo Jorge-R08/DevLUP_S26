@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bb6d16mw2nfep"]
+
+[ext_resource type="Script" uid="uid://b3odo5hacgipm" path="res://Scripts/bullet.gd" id="1_14k46"]
+[ext_resource type="Texture2D" uid="uid://bbhnsmcdx87x4" path="res://assets/testicle2/Fetus_shadow1_2.png" id="2_qvus8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14k46"]
+
+[node name="Bullet" type="Area2D" unique_id=946577555]
+script = ExtResource("1_14k46")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=735282908]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_qvus8")
+
+[node name="KillTimer" type="Timer" parent="." unique_id=252887099]
+wait_time = 10.0
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1121951511]
+shape = SubResource("CircleShape2D_14k46")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

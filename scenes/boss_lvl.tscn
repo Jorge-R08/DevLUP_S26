@@ -202,6 +202,7 @@ actions = {
 "pharaohs_curse": NodePath("actions/pharaohs_curse"),
 "slash": NodePath("actions/slash")
 }
+max_health = 10
 
 [node name="AnimatedSprite2D" parent="mob" index="0" unique_id=1172630743]
 sprite_frames = SubResource("SpriteFrames_4ns6o")
@@ -373,6 +374,7 @@ mouse_filter = 2
 text = "defend
 "
 
+[connection signal="summoner_dead" from="mob" to="." method="_on_mob_summoner_dead"]
 [connection signal="animation_finished" from="mob/curse" to="mob" method="_on_curse_animation_finished"]
 [connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]
 [connection signal="pressed" from="UI/action_buttons/slap_btn" to="." method="_on_slap_btn_pressed"]
