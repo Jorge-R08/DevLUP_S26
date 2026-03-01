@@ -39,3 +39,9 @@ func take_damage(dmg : int) -> void:
 func reset_position() -> void:
 	global_position = start_position
 	velocity = Vector2.ZERO
+
+func _on_enemy_attack_started() -> void:
+	print("hello")
+	var ab = get_node("../UI/action_buttons")
+	ab.get_node("Button").hide()
+	
