@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bjpgq5ec7uv0n" path="res://scenes/MainCharacter.tscn" id="2_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://bb6d16mw2nfep" path="res://scenes/Bullet.tscn" id="4_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_pbh3q"]
+[ext_resource type="Texture2D" uid="uid://c71agg2i8cj0q" path="res://assets/testicle2/Top_down_Battleground.png" id="6_pbh3q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2saf"]
 atlas = ExtResource("5_pbh3q")
@@ -52,6 +53,15 @@ offset_top = 35.0
 offset_right = 75.0
 offset_bottom = 58.0
 text = "SLASH"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=299039723]
+show_behind_parent = true
+offset_left = 917.5049
+offset_top = -1415.0
+offset_right = 2197.505
+offset_bottom = 426.91162
+rotation = 1.5707964
+texture = ExtResource("6_pbh3q")
 
 [connection signal="attack_started" from="Enemy" to="." method="_on_enemy_attack_started"]
 [connection signal="attack_started" from="Enemy" to="MainCharacter" method="_on_enemy_attack_started"]

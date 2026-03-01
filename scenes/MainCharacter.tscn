@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjpgq5ec7uv0n"]
 
-[ext_resource type="Script" uid="uid://ckihygvxc02be" path="res://Scripts/main_character.gd" id="1_ffy1q"]
+[ext_resource type="Script" uid="uid://ckihygvxc02be" path="res://scripts/main_character.gd" id="1_ffy1q"]
 [ext_resource type="Texture2D" uid="uid://kpti3v0ierss" path="res://assets/testicle2/Top_down_dawg.png" id="2_udfat"]
 [ext_resource type="Texture2D" uid="uid://dsrjyekq02unx" path="res://assets/testing/healthbarUnder.png" id="3_8wgdu"]
 [ext_resource type="Texture2D" uid="uid://d17b8rja7an68" path="res://assets/testing/healthbarProgress.png" id="4_ppvyy"]
@@ -9,6 +9,7 @@
 size = Vector2(52, 102)
 
 [node name="MainCharacter" type="CharacterBody2D" unique_id=1148853017 groups=["mc"]]
+top_level = true
 script = ExtResource("1_ffy1q")
 
 [node name="MC" type="Sprite2D" parent="." unique_id=1162802466]
