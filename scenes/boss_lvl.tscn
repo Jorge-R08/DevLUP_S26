@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://bn4wtc48xw72b"]
 
 [ext_resource type="PackedScene" uid="uid://gsrj824q8nnq" path="res://scenes/player.tscn" id="1_h2e4k"]
-[ext_resource type="Script" uid="uid://dl62m134f5rhs" path="res://scripts/game_manager.gd" id="1_h4g7e"]
+[ext_resource type="Script" uid="uid://ddhn0vgf44dxw" path="res://boss_lvl.gd" id="1_h4g7e"]
 [ext_resource type="PackedScene" uid="uid://c6cg33os57pgm" path="res://scenes/default_mob.tscn" id="2_h4g7e"]
 [ext_resource type="Script" uid="uid://jmgmbwvkwith" path="res://scripts/summoner_mob.gd" id="3_i8ytu"]
 [ext_resource type="Texture2D" uid="uid://cksyigq7cfxu" path="res://assets/Animation_sheet_for_wizard.png" id="4_7geuk"]
 [ext_resource type="Texture2D" uid="uid://b1mok6x7ylbsm" path="res://assets/testing/BrownFantasyUISheet.png" id="5_h8tem"]
 [ext_resource type="Texture2D" uid="uid://cuc82lm0rggw6" path="res://assets/Attacks_Sprite_sheet.png" id="6_ns2p0"]
 [ext_resource type="Texture2D" uid="uid://beda7stehb3j6" path="res://assets/testing/BG_FF2_09.png" id="7_hxvxg"]
-[ext_resource type="PackedScene" uid="uid://dvmi60becl8cj" path="res://dialogue_system/scenes/DialogueManager.tscn" id="8_cbn2u"]
 [ext_resource type="FontFile" uid="uid://dlr25irw8ddxe" path="res://assets/fonts/PixelOperator8.ttf" id="9_wd8tb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ktk1"]
@@ -170,9 +169,8 @@ animations = [{
 atlas = ExtResource("5_h8tem")
 region = Rect2(2, 4, 99, 99)
 
-[node name="boss_lvl" type="Node2D" unique_id=1329100139 node_paths=PackedStringArray("dialogue_manager", "player_char", "mob_char")]
+[node name="boss_lvl" type="Node2D" unique_id=1329100139 node_paths=PackedStringArray("player_char", "mob_char")]
 script = ExtResource("1_h4g7e")
-dialogue_manager = NodePath("UI/DialogueManager")
 player_char = NodePath("Player")
 mob_char = NodePath("mob")
 
@@ -202,7 +200,7 @@ actions = {
 "pharaohs_curse": NodePath("actions/pharaohs_curse"),
 "slash": NodePath("actions/slash")
 }
-max_health = 10
+is_tutorial_mob = true
 
 [node name="AnimatedSprite2D" parent="mob" index="0" unique_id=1172630743]
 sprite_frames = SubResource("SpriteFrames_4ns6o")
@@ -238,8 +236,6 @@ offset_right = 1280.0
 offset_bottom = 720.0
 texture = ExtResource("7_hxvxg")
 expand_mode = 1
-
-[node name="DialogueManager" parent="UI" unique_id=1151397926 instance=ExtResource("8_cbn2u")]
 
 [node name="action_buttons" type="Node" parent="UI" unique_id=1012389060]
 
@@ -374,6 +370,7 @@ mouse_filter = 2
 text = "defend
 "
 
+[connection signal="action_performed" from="." to="." method="_on_action_performed"]
 [connection signal="summoner_dead" from="mob" to="." method="_on_mob_summoner_dead"]
 [connection signal="animation_finished" from="mob/curse" to="mob" method="_on_curse_animation_finished"]
 [connection signal="pressed" from="UI/action_buttons/slash_btn" to="." method="_on_slash_btn_pressed"]

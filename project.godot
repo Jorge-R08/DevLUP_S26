@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DevLUP_S26_Jam"
-run/main_scene="uid://c5x1sdgu3nqsd"
+run/main_scene="uid://bn4wtc48xw72b"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

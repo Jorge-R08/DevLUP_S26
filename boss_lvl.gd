@@ -7,7 +7,6 @@ const MAX_MOB_THINK_TIME = 1.6
 const AFTER_ACTION_WAIT_TIME = 1
 
 @onready var _action_buttons: Node = $UI/action_buttons
-@export var dialogue_manager: DialogueManager 
 @onready var blast: AnimatedSprite2D
 
 @export var player_char : Node2D
@@ -26,7 +25,7 @@ var curr_char : characters = characters.NULL
 func _connect_signals():
 	action_performed.connect(_on_action_performed)
 	player_char.player_dead.connect(_on_player_player_dead)
-	mob_char.mob_dead.connect(_on_mob_mob_dead)
+	mob_char.summoner_dead.connect(_on_mob_summoner_dead)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -58,7 +57,6 @@ func next_turn():
 		for btn in _action_buttons.get_children():
 			if (player_char.actions[btn.get_child(0).name].turn_wait == 1):
 				btn.disabled = false
-				
 	elif curr_char == characters.PLAYER:
 		player_char.end_turn()
 		mob_char.start_turn()
@@ -132,53 +130,19 @@ func _on_action_performed() -> void:
 		btn.disabled = true
 	for action in player_char.actions:
 		player_char.actions[action].curr_turn_wait = min(player_char.actions[action].turn_wait, player_char.actions[action].curr_turn_wait+1)
-		print("ACTION NAME: ", action, "CURR_TURN_WAIT: ", action.curr_turn_wait)
 	
 func choose(array : Array):
 	array.shuffle()
 	return array[0]
 
-"""
-#dialogue use sample 
-# Called when the funny button is pressed
-func _on_FunnyButton_pressed() -> void:
-	dialogue_manager.show_messages([
-		"So,{p=0.5} you decided for a funny message...",
-		"let's see...",
-		"...",
-		"Bro,{p=0.5} you are putting me on the spotlight",
-		"NO IM NOT NERVOUS, YOU ARE NERVOUS, SHUT UP!"
-	])
-
-# Called when the sad button is pressed
-func _on_SadButton_pressed() -> void:
-	dialogue_manager.show_messages([
-		"I don't think we need more sad stuff so...",
-		"[wave]I'm gonna sing a song instead~[/wave]",
-		"[wave]About{p=1.0} eh...[/wave]",
-		"nevermind..."
-	])
-
-# Called when the weird button is pressed
-func _on_WeirdButton_pressed() -> void:
-	dialogue_manager.show_messages([
-		"Anatidaephobia is the fear that, somewhere,{p=0.2} at any given time",
-		"[wave]a duck is watching you...[/wave]",
-		"MENACINGLY",
-		"But seriously, if a duck was randomly watching me{p=0.2} I would freak out too...",
-		"At least it's not a goose,{p=0.2} now THAT's [shake]terrifying[/shake]"
-	])
-"""
-
-
-func _on_mob_mob_dead() -> void:
-	game_over = true
-	if mob_char.is_tutorial_mob:
-		await get_tree().create_timer(5.0).timeout
-		call_deferred("_go_to_next_scene")
-		
-func _go_to_next_scene() -> void:
-	get_tree().change_scene_to_file("res://scenes/boss_lvl.tscn")
+func _go_to_next_scene_oscar() -> void:
+	get_tree().change_scene_to_file("res://scenes/game_manager_2.tscn")
 
 func _on_player_player_dead() -> void:
 	game_over = true
+
+func _on_mob_summoner_dead() -> void:
+	print("SUMMON YETEHAYU")
+	game_over = true
+	await get_tree().create_timer(5.0).timeout
+	call_deferred("_go_to_next_scene_oscar")
